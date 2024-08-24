@@ -7,25 +7,34 @@ const saveEventButton = document.getElementById('save-event');
 
 let events = {};
 
-function renderCalendar(year, month) {
+function getFutureTwoWeeks() {
+    const today = new Date();
+    const start = new Date(today);
+    const end = new Date(today);
+    end.setDate(today.getDate() + 13); // 2 weeks (14 days) from today
+
+    return { start, end };
+}
+
+function renderCalendar() {
     calendarElement.innerHTML = '';
+    const { start, end } = getFutureTwoWeeks();
+    const days = [];
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    for (let i = 0; i < firstDay; i++) {
-        calendarElement.innerHTML += '<div></div>';
+    for (let date = new Date(start); date <= end; date.setDate(date.getDate() + 1)) {
+        days.push(new Date(date));
     }
 
-    for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day).toISOString().split('T')[0];
-        const event = events[date] || '';
+    days.forEach(date => {
+        const dateStr = date.toISOString().split('T')[0];
+        const day = date.getDate();
+        const event = events[dateStr] || '';
         calendarElement.innerHTML += `
-            <div data-date="${date}">
+            <div data-date="${dateStr}">
                 ${day}<br>${event}
             </div>
         `;
-    }
+    });
 
     addEventListeners();
 }
@@ -46,12 +55,9 @@ function saveEvent() {
 
     if (date && description) {
         events[date] = description;
-        renderCalendar(currentYear, currentMonth);
+        renderCalendar();
     }
 }
 
-let currentYear = new Date().getFullYear();
-let currentMonth = new Date().getMonth();
-
-renderCalendar(currentYear, currentMonth);
+renderCalendar();
 saveEventButton.addEventListener('click', saveEvent);

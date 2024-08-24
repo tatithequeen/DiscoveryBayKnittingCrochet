@@ -1,39 +1,36 @@
-
-.calendar {
-    border: 1px solid #ddd;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-
-.header button {
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.days {
+#calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    margin-bottom: 10px;
-    font-weight: bold;
+    gap: 1px;
+    margin: 20px;
+    width: 350px; /* Adjust width as needed */
 }
 
-.dates {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-}
-
-.dates div {
+#calendar div {
+    padding: 20px;
     text-align: center;
-    padding: 10px;
+    border: 1px solid #ddd;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
-.dates div:hover {
-    background-color: #e0e0e0;
+#calendar div:nth-child(7n+1) {
+    border-left: 2px solid #000; /* Optional: Highlight Sunday */
+}
+
+#calendar div:nth-child(-n+7) {
+    border-top: 2px solid #000; /* Optional: Highlight the top row */
+}
+
+#event-form {
+    margin: 20px;
+}
+
+#event-form input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
 }
