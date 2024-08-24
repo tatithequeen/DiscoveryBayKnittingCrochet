@@ -3,59 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knitting & Crochet Club</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #f4a261;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            z-index: 1000;
-        }
-        nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-            background-color: #264653;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 0 0 0 10px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            padding: 5px 10px;
-            display: inline-block;
-        }
-        nav a:hover {
-            background-color: #2a9d8f;
-            border-radius: 5px;
-        }
-        section {
-            padding: 60px 20px;
-            margin-top: 50px; /* Ensure section content does not overlap with fixed nav */
-        }
-        footer {
-            background-color: #264653;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-    </style>
+    <title>Discovery Bay Knitting Crochet</title>
         <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calendar</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -78,23 +27,11 @@
 
     <!-- Sections -->
     <section id="events">
-        <div class="container">
-         <h2>Upcoming Events</h2>
-         <p>August/September</p>
-         <div id="calendar"></div>
-
-<!-- Calendar Event Function comment out after adding new events -->
-  <!-- <div id="event-form">
-        <h3>Add/Edit Event</h3>
-        <label for="event-date">Date:</label>
-        <input type="date" id="event-date" required>
-        <label for="event-description">Description:</label>
-        <input type="text" id="event-description" required>
-        <button id="save-event">Save Event</button>
-    </div> 
+         <div id="events-container">
+        <h1>Upcoming Weekly Events</h1>
+        <ul id="events-list"></ul>
+    </div>
     
-    -->
-
     <script src="script.js"></script>
     </section>
 

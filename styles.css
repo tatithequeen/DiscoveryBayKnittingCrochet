@@ -1,36 +1,80 @@
-#calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
-    margin: 20px;
-    width: 350px; /* Adjust width as needed */
-}
-
-#calendar div {
+#body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f4a261;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1000;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #264653;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 0 0 0 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px 10px;
+            display: inline-block;
+        }
+        nav a:hover {
+            background-color: #2a9d8f;
+            border-radius: 5px;
+        }
+        section {
+            padding: 60px 20px;
+            margin-top: 50px; /* Ensure section content does not overlap with fixed nav */
+        }
+        footer {
+            background-color: #264653;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        
+        }
+        
+#events-container {
+    width: 100%;
+    max-width: 600px;
+    background: #fff;
     padding: 20px;
-    text-align: center;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#calendar div:nth-child(7n+1) {
-    border-left: 2px solid #000; /* Optional: Highlight Sunday */
+h1 {
+    margin-top: 0;
+    color: #333;
 }
 
-#calendar div:nth-child(-n+7) {
-    border-top: 2px solid #000; /* Optional: Highlight the top row */
+#events-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-#event-form {
-    margin: 20px;
+#events-list li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    background: #fafafa;
+    margin-bottom: 5px;
+    border-radius: 4px;
 }
 
-#event-form input {
-    display: block;
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 10px 20px;
+#events-list li:last-child {
+    border-bottom: none;
 }

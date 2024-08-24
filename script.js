@@ -1,63 +1,38 @@
 // script.js
 
-const calendarElement = document.getElementById('calendar');
-const eventDateInput = document.getElementById('event-date');
-const eventDescriptionInput = document.getElementById('event-description');
-const saveEventButton = document.getElementById('save-event');
+const events = [
+    { date: '2024-08-26', title: 'Weekly Meeting', description: 'Club members meeting in Room 101.' },
+    { date: '2024-08-28', title: 'Workshop: Web Development', description: 'Hands-on workshop for beginners.' },
+    { date: '2024-08-30', title: 'Social Event', description: 'Join us for a social evening at the local park.' },
+    // Add more events here
+];
 
-let events = {};
-
-function getFutureTwoWeeks() {
+function getCurrentWeekDates() {
     const today = new Date();
-    const start = new Date(today);
-    const end = new Date(today);
-    end.setDate(today.getDate() + 13); // 2 weeks (14 days) from today
+    const startOfWeek = today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1); // Adjust to start from Monday
+    const endOfWeek = startOfWeek + 6;
+
+    const start = new Date(today.setDate(startOfWeek));
+    const end = new Date(today.setDate(endOfWeek));
 
     return { start, end };
 }
 
-function renderCalendar() {
-    calendarElement.innerHTML = '';
-    const { start, end } = getFutureTwoWeeks();
-    const days = [];
+function renderWeeklyEvents() {
+    const { start, end } = getCurrentWeekDates();
+    const eventsList = document.getElementById('events-list');
 
-    for (let date = new Date(start); date <= end; date.setDate(date.getDate() + 1)) {
-        days.push(new Date(date));
-    }
-
-    days.forEach(date => {
-        const dateStr = date.toISOString().split('T')[0];
-        const day = date.getDate();
-        const event = events[dateStr] || '';
-        calendarElement.innerHTML += `
-            <div data-date="${dateStr}">
-                ${day}<br>${event}
-            </div>
-        `;
+    const filteredEvents = events.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate >= start && eventDate <= end;
     });
 
-    addEventListeners();
+    eventsList.innerHTML = filteredEvents.map(event => `
+        <li>
+            <strong>${new Date(event.date).toLocaleDateString()}</strong>: ${event.title}
+            <p>${event.description}</p>
+        </li>
+    `).join('');
 }
 
-function addEventListeners() {
-    const dayCells = calendarElement.querySelectorAll('div[data-date]');
-    dayCells.forEach(cell => {
-        cell.addEventListener('click', () => {
-            eventDateInput.value = cell.getAttribute('data-date');
-            eventDescriptionInput.value = events[cell.getAttribute('data-date')] || '';
-        });
-    });
-}
-
-function saveEvent() {
-    const date = eventDateInput.value;
-    const description = eventDescriptionInput.value;
-
-    if (date && description) {
-        events[date] = description;
-        renderCalendar();
-    }
-}
-
-renderCalendar();
-saveEventButton.addEventListener('click', saveEvent);
+renderWeeklyEvents();
