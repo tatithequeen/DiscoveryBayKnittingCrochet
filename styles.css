@@ -11,26 +11,7 @@
             position: relative;
             z-index: 1000;
         }
-        nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-            background-color: #264653;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 0 0 0 10px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            padding: 5px 10px;
-            display: inline-block;
-        }
-        nav a:hover {
-            background-color: #2a9d8f;
-            border-radius: 5px;
-        }
+
         section {
             padding: 60px 20px;
             margin-top: 50px; /* Ensure section content does not overlap with fixed nav */
