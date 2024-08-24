@@ -1,51 +1,57 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const monthYearElement = document.getElementById('monthYear');
-    const datesElement = document.getElementById('dates');
-    const prevButton = document.getElementById('prev');
-    const nextButton = document.getElementById('next');
+// script.js
 
-    let currentMonth = new Date().getMonth();
-    let currentYear = new Date().getFullYear();
+const calendarElement = document.getElementById('calendar');
+const eventDateInput = document.getElementById('event-date');
+const eventDescriptionInput = document.getElementById('event-description');
+const saveEventButton = document.getElementById('save-event');
 
-    function renderCalendar(month, year) {
-        datesElement.innerHTML = '';
-        monthYearElement.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+let events = {};
 
-        const firstDay = new Date(year, month, 1).getDay();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
+function renderCalendar(year, month) {
+    calendarElement.innerHTML = '';
 
-        for (let i = 0; i < firstDay; i++) {
-            datesElement.appendChild(document.createElement('div'));
-        }
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-        for (let day = 1; day <= daysInMonth; day++) {
-            const dayElement = document.createElement('div');
-            dayElement.textContent = day;
-            datesElement.appendChild(dayElement);
-        }
+    for (let i = 0; i < firstDay; i++) {
+        calendarElement.innerHTML += '<div></div>';
     }
 
-    function updateCalendar() {
-        renderCalendar(currentMonth, currentYear);
+    for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month, day).toISOString().split('T')[0];
+        const event = events[date] || '';
+        calendarElement.innerHTML += `
+            <div data-date="${date}">
+                ${day}<br>${event}
+            </div>
+        `;
     }
 
-    prevButton.addEventListener('click', () => {
-        currentMonth--;
-        if (currentMonth < 0) {
-            currentMonth = 11;
-            currentYear--;
-        }
-        updateCalendar();
-    });
+    addEventListeners();
+}
 
-    nextButton.addEventListener('click', () => {
-        currentMonth++;
-        if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear++;
-        }
-        updateCalendar();
+function addEventListeners() {
+    const dayCells = calendarElement.querySelectorAll('div[data-date]');
+    dayCells.forEach(cell => {
+        cell.addEventListener('click', () => {
+            eventDateInput.value = cell.getAttribute('data-date');
+            eventDescriptionInput.value = events[cell.getAttribute('data-date')] || '';
+        });
     });
+}
 
-    updateCalendar();
-});
+function saveEvent() {
+    const date = eventDateInput.value;
+    const description = eventDescriptionInput.value;
+
+    if (date && description) {
+        events[date] = description;
+        renderCalendar(currentYear, currentMonth);
+    }
+}
+
+let currentYear = new Date().getFullYear();
+let currentMonth = new Date().getMonth();
+
+renderCalendar(currentYear, currentMonth);
+saveEventButton.addEventListener('click', saveEvent);
