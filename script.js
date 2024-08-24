@@ -1,15 +1,16 @@
 // script.js
 
 const events = [
-    { date: '2024-08-28T10:00', title: 'Weekly Meeting', description: 'Bring your personal projects to Roadees' },
-    { date: '2024-09-05T14:00', title: 'Weekly Meeting', description: 'Location to be determined' },
+    { date: '2024-08-28T11:15', title: 'Weekly Meeting', description: 'Bring your personal projects to Roadees' },
+    { date: '2024-09-05T11:30', title: 'Weekly Meeting', description: 'Location to be determined' },
     // Add more events here
 ];
 
 const news = [
-{ date: '2024-08-24', title: 'Community Center Update', description: 'We are diligently working on making Knitting Crochet Discovery Bay an official community center class. Stay tuned for more details!' },
+    { date: '2024-08-24', title: 'Community Center Update', description: 'We are diligently working on making Knitting Crochet Discovery Bay an official community center class. Stay tuned for more details!' },
     // Add more news items here
 ];
+
 
 function formatDateTime(dateTime) {
     const options = {
@@ -19,7 +20,6 @@ function formatDateTime(dateTime) {
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
-
     };
     return new Date(dateTime).toLocaleDateString('en-US', options);
 }
@@ -48,5 +48,8 @@ function renderNews() {
     `).join('');
 }
 
+
+
 renderEvents();
 renderNews();
+// Call the function to render the sentence
